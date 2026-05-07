@@ -1,0 +1,39 @@
+##Created by Jose Antonio Juan Prado 20/3/2023
+name: Publish XCFramework from SPM project
+description: Publish XCFramework from SPM project
+inputs:
+  github_token:
+    required: true
+  clienters_repository:
+    required: true
+  release_version:
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+
+    - name: Trust the GitHub SSH keys
+      run: |
+        for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts
+      shell: bash
+
+    
+    - name: Copy files and publish to Facephi-Clienters
+      shell: bash
+      run: |
+          git clone https://.:${{ inputs.github_token }}@github.com/facephi-clienters/${{ inputs.clienters_repository }}
+          cd ${{ inputs.clienters_repository }}
+          echo "REPOSITORY=$(pwd)" >> $GITHUB_ENV
+
+          cp ../Package.swift Package.swift
+          cp -R ../FPHITrackingWidget.xcframework/  FPHITrackingWidget.xcframework/ 
+        
+          git config --global user.email developer@facephi.com
+          git config --global user.name "Facephi"
+
+          git add .
+          git commit -m "New SPM Version: ${{ inputs.release_version }}"
+          git push 
+          git tag ${{ inputs.release_version }}
+          git push --tags
