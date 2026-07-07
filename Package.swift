@@ -2,36 +2,33 @@
 import PackageDescription
 
 let package = Package(
-    name: "FPHITrackingWidget-SPM",
+    name: "FPHITrackingWidget",
     platforms: [
         .iOS(.v13),
     ],
     products: [
+        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "FPHITrackingWidget",
-            targets: [
-                "FPHITrackingWidget",
-            ]
-        ),
+            targets: ["FPHITrackingWidget-SPM"]),
+    ],
+    dependencies: [
+        // Dependencies declare other packages that this package depends on.
+        //.package(url: "git@github.com:fingerprintjs/fingerprintjs-pro-ios.git", .upToNextMinor(from: "2.8.0")),
     ],
     targets: [
+        // Targets are the basic building blocks of a package, defining a module or a test suite.
+        // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "FPHITrackingWidget",
+            name: "FPHITrackingWidget-SPM",
             dependencies: [
-                "FPHITrackingCore",
-                "_LocationEssentials",
-            ],
-            path: "Sources/FPHITrackingWidget"
-        ),
+                "FPHITrackingWidget",
+                //.product(name: "FingerprintPro", package: "fingerprintjs-pro-ios")
+            ]),
         .binaryTarget(
-            name: "FPHITrackingCore",
-            url: "https://facephicorp.jfrog.io/artifactory/spm-pro-fphi/WIDGET/FPHITrackingWidget/1.4.3/FPHITrackingCore.zip",
-            checksum: "ffcf693d95236fce2240440a8045bb8f8d364ffe9668385a1e6f7a143244326f"
-        ),
-        .binaryTarget(
-            name: "_LocationEssentials",
-            url: "https://facephicorp.jfrog.io/artifactory/spm-pro-fphi/WIDGET/FPHITrackingWidget/1.4.3/_LocationEssentials.zip",
-            checksum: "df06d01bb107b1b3e65cd1a97a70f600ea6f4a2fad85469cefb5727d852d763c"
-        ),
+            name: "FPHITrackingWidget",
+            url: "https://facephicorp.jfrog.io/artifactory/spm-pro-fphi/WIDGET/FPHITrackingWidget/1.4.6/FPHITrackingWidget.zip",
+            checksum: "72a6f2886bb850c7ce187cc9b57ac9b5aecb5614631b3b02f66d09ef5bf853b9"
+        )
     ]
 )
