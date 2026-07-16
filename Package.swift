@@ -27,8 +27,8 @@ let package = Package(
             ]),
         .binaryTarget(
             name: "FPHITrackingWidget",
-            url: "https://facephicorp.jfrog.io/artifactory/spm-pro-fphi/WIDGET/FPHITrackingWidget/1.4.6/FPHITrackingWidget.zip",
-            checksum: "72a6f2886bb850c7ce187cc9b57ac9b5aecb5614631b3b02f66d09ef5bf853b9"
+            url: "https://facephicorp.jfrog.io/artifactory/spm-pro-fphi/WIDGET/FPHITrackingWidget/1.4.8/FPHITrackingWidget.zip",
+            checksum: "c3672172ae28600781211d2f1ac0a330577cd8e50aae18e3039668b35472de21"
         )
     ]
 )
